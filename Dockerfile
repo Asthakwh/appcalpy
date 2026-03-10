@@ -1,11 +1,17 @@
-# Use the official Nginx image as the base
-FROM public.ecr.aws/nginx/nginx:1.25
+# Use official Python image
+FROM python:3.11-slim
 
-# Copy the 2048 game files to the Nginx web root
-COPY . /usr/share/nginx/html
+# Set working directory inside container
+WORKDIR /app
 
-# Expose the default Nginx HTTP port
-EXPOSE 80
+# Copy project files into container
+COPY . /app
 
-# Start Nginx when the container starts
-CMD ["nginx", "-g", "daemon off;"]
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Expose Flask port
+EXPOSE 5000
+
+# Run the application
+CMD ["python", "app.py"]
