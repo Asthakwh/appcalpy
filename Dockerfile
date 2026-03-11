@@ -7,6 +7,7 @@ WORKDIR /app
 # Copy project files into container
 COPY . /app
 
+RUN pip install flask
 # Expose Flask port
 EXPOSE 5000
 
