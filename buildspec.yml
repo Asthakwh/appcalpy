@@ -4,19 +4,19 @@ phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
-      - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 024239493672.dkr.ecr.ap-south-1.amazonaws.com/appcal
+      - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 024239493672.dkr.ecr.ap-south-1.amazonaws.com
   build:
     commands:
       - echo Building the Docker image...
-      - docker build -t appcal .
+      - docker build -t appcalpy .
       - echo Tagging the Docker image...
-      - docker tag appcal:latest 024239493672.dkr.ecr.ap-south-1.amazonaws.com/appcal
+      - docker tag appcalpy:latest 024239493672.dkr.ecr.ap-south-1.amazonaws.com/appcalpy
   post_build:
     commands:
       - echo Pushing the Docker image to Amazon ECR...
-      - docker push 024239493672.dkr.ecr.ap-south-1.amazonaws.com/appcal:latest
+      - docker push 024239493672.dkr.ecr.ap-south-1.amazonaws.com/appcalpy
       - echo Creating imagedefinitions.json file for ECS deployment...
-      - echo '[{"name":"appcal","imageUri":"024239493672.dkr.ecr.ap-south-1.amazonaws.com/appcal"}]' > imagedefinitions.json
+      - echo '[{"name":"appcalpy","imageUri":"024239493672.dkr.ecr.ap-south-1.amazonaws.com/appcalpy"}]' > imagedefinitions.json
 artifacts:
   files:
     - imagedefinitions.json
